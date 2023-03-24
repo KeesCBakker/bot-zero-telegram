@@ -5,7 +5,7 @@ import { alias } from "hubot-command-mapper"
  * into simple versions.
  */
 const table = {
-  "fav-norris": "norris nr 112",
+  //"fav-norris": "norris nr 112",
 }
 
 module.exports = robot => alias(robot, table)

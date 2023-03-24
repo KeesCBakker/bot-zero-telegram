@@ -44,7 +44,7 @@ validateToken(config)
 const params = convertConfigIntoCrossEnvParameters(config)
 params.push("hubot")
 params.push("--adapter")
-params.push("slack")
+params.push("telegram")
 params.push("--disable-httpd")
 
 // if we are started by ts-node-dev, we need to

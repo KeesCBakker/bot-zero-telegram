@@ -6,7 +6,6 @@
 
 import removeMarkDown from "remove-markdown"
 import { asciiArtChalker, chalker } from "chalk-with-markers"
-import { start } from "../common/slack"
 import "source-map-support/register"
 
 import {
@@ -21,21 +20,8 @@ module.exports = async (robot: Hubot.Robot) => {
   removeTrailingWhitespaceCharactersFromIncommingMessages(robot)
   removeTrailingBotWhitespaceCharactersFromIncommingMessages(robot)
 
-  // setup adapters
-  const adapters = start(process.env.HUBOT_SLACK_TOKEN)
-  const info = await adapters.getBotInfo()
-
   // splash screen
   splash()
-
-  // debug info
-  console.log(
-    chalker.colorize(`
-[q]Bot name: [y]@${info.botName}
-[q]App URL:  [y]${info.appUrl}
-
-[g]Started!`)
-  )
 }
 
 function splash() {
@@ -46,7 +32,11 @@ b\\______   \\ _____/  |_  \\____    /___________  bbb____   p|   b|   c|   |
 cc |    |  _//  _ \\   __\\   /     // __ \\_  __ \\/  _ \\  p|   b|   c|   |
 pp |    |   (  <_> )  |    pp/     /p\\  ___/|  | \\(  <_> ) p|   b|   c|   |
 b |______  /\\____/|__|   pp/_______b \\___  >__|   \\____/  p|___b|___c|___|
-ccc        \\/            c          \\/   \\/                        `)
+ccc        \\/            c          \\/   \\/                        
+
+                     ---==[ TELEGRAM EDITION ]==---
+   
+`)
   )
 }
 

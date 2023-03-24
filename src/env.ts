@@ -2,11 +2,7 @@ import fs from "fs"
 import { chalker } from "chalk-with-markers"
 
 export function getConfig(envFilePath: string) {
-  let defaultOptions = [
-    "INSTALLED_TEAM_ONLY=true",
-    "HUBOT_HELP_DISABLE_HTTP=true",
-    `HUBOT_SLACK_RTM_CLIENT_OPTS='{"dataStore": false, "useRtmConnect": true }`,
-  ]
+  let defaultOptions = ["INSTALLED_TEAM_ONLY=true", "HUBOT_HELP_DISABLE_HTTP=true"]
 
   if (process.env.TS_NODE_DEV) {
     defaultOptions.push("ENVIRONMENT=local")
@@ -36,24 +32,16 @@ export function validateToken(config: string[]) {
   let token =
     config
       .map(x => x.split("="))
-      .filter(x => x[0] == "HUBOT_SLACK_TOKEN")
+      .filter(x => x[0] == "TELEGRAM_TOKEN")
       .map(x => x[1].trim())
-      .find(Boolean) || process.env.HUBOT_SLACK_TOKEN
+      .find(Boolean) || process.env.TELEGRAM_TOKEN
 
-  if (token.startsWith('"') && token.endsWith('"')) {
+  if (token && token.startsWith('"') && token.endsWith('"')) {
     token = token.substr(1, token.length - 2)
   }
 
   if (!token || token.length == 0) {
-    errorAndExit("No HUBOT_SLACK_TOKEN found.", "Please add it to " + envMsg)
-  }
-
-  if (token.length < 10) {
-    errorAndExit("Invalid HUBOT_SLACK_TOKEN.", "Please add the whole token to" + envMsg)
-  }
-  const tokenStart = "xoxb-"
-  if (!token.startsWith(tokenStart)) {
-    errorAndExit("Invalid HUBOT_SLACK_TOKEN type.", "Please add the 'xoxb-' token to" + envMsg)
+    errorAndExit("No TELEGRAM_TOKEN found.", "Please add it to " + envMsg)
   }
 
   return token
