@@ -18,11 +18,6 @@ function compileAndStart(params: string[]) {
 }
 
 function start(params: string[]) {
-  // dist directory must be available, it is after building
-  if (process.env.TS_NODE_DEV) {
-    fs.copyFileSync("./external-scripts.json", "./dist/external-scripts.json")
-  }
-
   // change directory because of Typescript, must be done
   // after loading config, because the config is located in
   // the root!
