@@ -45,6 +45,7 @@ export function removeMarkdownFromInput(robot: Hubot.Robot) {
 
   robot.receiveMiddleware((context, next, done) => {
     const text = context.response.message.text
+    console.log(text)
     if (text) {
       let newText = removeMarkDown(text)
       if (text != newText) {

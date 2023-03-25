@@ -1,5 +1,4 @@
-import { getConfig, validateToken, convertConfigIntoCrossEnvParameters } from "./env"
-import fs from "fs"
+import { getConfig, validateToken, convertConfigIntoCrossEnvParameters, getHubotName } from "./env"
 import { spawn } from "child_process"
 import { chalker } from "chalk-with-markers"
 
@@ -41,6 +40,13 @@ params.push("hubot")
 params.push("--adapter")
 params.push("telegram")
 params.push("--disable-httpd")
+
+// add the bot name if it is configured
+let name = getHubotName(config)
+if (name) {
+  params.push("--name")
+  params.push(name)
+}
 
 // if we are started by ts-node-dev, we need to
 // do a build first, so we have a filled scripts
