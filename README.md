@@ -9,11 +9,13 @@ Starting this project is really easy:
 1. Fork this project (top right corner)
 2. Clone your forked project to your pc.
 3. Goto the @BotFather, ask for a token
-4. Copy `.example.env` to `.env` and add the Telegram token to this file.
-5. Open a terminal and navigate to your bot directory.
-6. Enter `npm install` to install the NodeJs packages.
-7. Start the bot using `npm run dev`.
-8. Enjoy!
+4. Copy `.example.env` to `.env`
+5. Add the Telegram token to the file.
+6. Add the name of the bot to the file.
+7. Open a terminal and navigate to your bot directory.
+8. Enter `npm install` to install the NodeJs packages.
+9. Start the bot using `npm run dev`.
+10. Enjoy!
 
 ## Good to know
 
@@ -32,7 +34,7 @@ If you want to run in Docker, execute the following:
 
 ```sh
 docker build -t bot-zero .
-docker run -e TELEGRAM_TOKEN=your-token-here -it bot-zero
+docker run -rm -e TELEGRAM_TOKEN=your-token-here HUBOT_NAME=your-bot-name-here -it bot-zero
 ```
 
 **Packages** <br/>

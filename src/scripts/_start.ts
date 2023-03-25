@@ -13,6 +13,7 @@ import {
   removeTrailingBotWhitespaceCharactersFromIncommingMessages,
 } from "hubot-command-mapper"
 import Hubot from "hubot"
+import { createTelegramApi } from "../common/telegram"
 
 module.exports = async (robot: Hubot.Robot) => {
   // make sure command mapper behaves
@@ -20,8 +21,22 @@ module.exports = async (robot: Hubot.Robot) => {
   removeTrailingWhitespaceCharactersFromIncommingMessages(robot)
   removeTrailingBotWhitespaceCharactersFromIncommingMessages(robot)
 
+  const api = createTelegramApi()
+  const me = await api.getMe()
+
+  let name = [me.first_name, me.last_name].filter(x => x).join(" ")
+
   // splash screen
   splash()
+
+  // debug info
+  console.log(
+    chalker.colorize(`
+[q]Bot username: [y]@${me.username}
+[q]Bot name:     [y]${name}
+
+[g]Started!`)
+  )
 }
 
 function splash() {
@@ -34,9 +49,7 @@ pp |    |   (  <_> )  |    pp/     /p\\  ___/|  | \\(  <_> ) p|   b|   c|   |
 b |______  /\\____/|__|   pp/_______b \\___  >__|   \\____/  p|___b|___c|___|
 ccc        \\/            c          \\/   \\/                        
 
-                   ---==[ TELEGRAM EDITION ]==---
-                  
-`)
+                   ---==[ TELEGRAM EDITION ]==---`)
   )
 }
 

@@ -1,5 +1,6 @@
 import { IContext } from "hubot-command-mapper"
 import TelegramBot, { SendMessageOptions, EditMessageTextOptions } from "node-telegram-bot-api"
+import { createTelegramApi } from "./telegram"
 
 class Message {
   constructor(
@@ -152,10 +153,4 @@ export function createUpdatableMessage(chatId: string | IContext) {
   }
 
   return new UpdatableMessage(createTelegramApi(), id, null)
-}
-
-function createTelegramApi() {
-  const token = process.env.TELEGRAM_TOKEN
-  const bot = new TelegramBot(token, { polling: false })
-  return bot
 }
